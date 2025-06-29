@@ -1,26 +1,21 @@
 import logo from './logo.svg';
 import './App.css';
 
+import { Unity, useUnityContext } from "react-unity-webgl";
+
+const { unityProvider, loadingProgression, isLoaded } = useUnityContext({
+  loaderUrl: "assets/game.loader.js",
+  dataUrl: "assets/game.data",
+  frameworkUrl: "assets/game.framework.js",
+  codeUrl: "assets/game.wasm",
+});
+
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <strong>Bienvenido Gente</strong>
-        <strong>PRUEBA UNITY</strong>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <>
+    {!isLoaded && <p>Cargando {Math.round(loadingProgression * 100)}%</p>}
+    <Unity unityProvider={unityProvider} style={{ width: "100%", height: "100%" }} />
+  </>
   );
 }
 
