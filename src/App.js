@@ -14,7 +14,7 @@ function App() {
   return (
     <div>
       {!isLoaded && <p>Cargando... {Math.round(loadingProgression * 100)}%</p>}
-      <Unity unityProvider={unityProvider} style={{ width: "100%", height: "100%" }} />
+      <Unity unityProvider={unityProvider} style={{ width: "900px", height: "600px" }} />
     </div>
   );
 }
