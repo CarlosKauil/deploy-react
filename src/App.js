@@ -1,7 +1,6 @@
-
-
-import { Unity, useUnityContext } from "react-unity-webgl";
 import React from "react";
+import { Unity, useUnityContext } from "react-unity-webgl";
+import "./App.css"; // Asegúrate de que este CSS exista o ajusta según tu estructura
 
 function App() {
   const { unityProvider, loadingProgression, isLoaded } = useUnityContext({
@@ -12,9 +11,27 @@ function App() {
   });
 
   return (
-    <div>
-      {!isLoaded && <p>Cargando... {Math.round(loadingProgression * 100)}%</p>}
-      <Unity unityProvider={unityProvider} style={{ width: "900px", height: "600px" }} />
+    <div className="app-container">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="navbar-logo">Kreaverse</div>
+        <ul className="navbar-links">
+          <li>Inicio</li>
+          <li>Información</li>
+          <li>Areas</li>
+          <li>Metaverso</li>
+          <li>Login</li>
+        </ul>
+      </nav>
+
+      {/* Contenedor del juego Unity */}
+      <main className="unity-wrapper">
+        {!isLoaded && <p className="loading-text">Cargando... {Math.round(loadingProgression * 100)}%</p>}
+        <Unity
+          unityProvider={unityProvider}
+          style={{ width: "100%", height: "100%" }}
+        />
+      </main>
     </div>
   );
 }
