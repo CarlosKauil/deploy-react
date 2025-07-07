@@ -2,6 +2,7 @@ import React from "react";
 import { Unity, useUnityContext } from "react-unity-webgl";
 import "./App.css"; // Asegúrate de que este CSS exista o ajusta según tu estructura
 
+
 function App() {
   const { unityProvider, loadingProgression, isLoaded } = useUnityContext({
     loaderUrl: "assets/game.loader.js",
