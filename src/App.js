@@ -1,25 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import React from "react";
+import { Unity, useUnityContext } from "react-unity-webgl";
+import "./App.css"; // Asegúrate de que este CSS exista o ajusta según tu estructura
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <strong>Bienvenido Gente!</strong>
+  const { unityProvider, loadingProgression, isLoaded } = useUnityContext({
+    loaderUrl: "assets/game.loader.js",
+    dataUrl: "assets/game.data",
+    frameworkUrl: "assets/game.framework.js",
+    codeUrl: "assets/game.wasm",
+  });
 
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+  return (
+    <div className="app-container">
+      {/* Navbar */}
+      <nav className="navbar">
+        <div className="navbar-logo">Kreaverse</div>
+        <ul className="navbar-links">
+          <li>Inicio</li>
+          <li>Información</li>
+          <li>Areas</li>
+          <li>Metaverso</li>
+          <li>Login</li>
+        </ul>
+      </nav>
+
+      {/* Contenedor del juego Unity */}
+      <main className="unity-wrapper">
+        {!isLoaded && <p className="loading-text">Cargando... {Math.round(loadingProgression * 100)}%</p>}
+        <Unity
+          unityProvider={unityProvider}
+          style={{ width: "100%", height: "100%" }}
+        />
+      </main>
     </div>
   );
 }
